@@ -24,7 +24,7 @@ author: spatchcock
 
 # This URL is the main address for absolute links. Don't include a slash at the end.
 #
-url: 'https://spatchcock.github.io/monetary_economics_python'
+url: 'https://misunderheard.org/monetary_economics_python'
 baseurl: ''
 
 # This is for the editing function in _/includes/improve_content
