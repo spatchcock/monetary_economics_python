@@ -1,0 +1,22 @@
+- title: monetary_economics_python
+  url: "/"
+  side: left
+
+- title: "Table of contents"
+  url: "contents"
+  side: left
+  dropdown:
+  - title: "Introduction"
+    url: "/introduction/"
+
+- title: "Search"
+  url: "/search/"
+  side: right
+
+- title: "misunderheard"
+  url: "http://misunderheard.org"
+  side: right
+
+- title: "Contact"
+  url: "/contact/"
+  side: right
