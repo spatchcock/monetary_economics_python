@@ -2,7 +2,7 @@
 layout: default
 title: "Home"
 teaser: ""
-breadcrumb: true
+breadcrumb: false
 header: false
 permalink: "/"
 ---
@@ -13,7 +13,7 @@ permalink: "/"
 			{% assign counter = 1 %}
 			{% for post in site.posts reversed limit:1000 %}
 			<dd class="navigation">
-            <a href="{{ site.url }}{{ post.url }}"><strong>{{ post.title }}</strong>{% if post.subheadline %} </br>{{ post.subheadline }}{% endif %}</a>
+            <a href="{{ site.url }}{{ post.url }}"><strong>{{counter}}. {{ post.title }}</strong>{% if post.subheadline %} </br>{{ post.subheadline }}{% endif %}</a>
 
               
             </dd>
