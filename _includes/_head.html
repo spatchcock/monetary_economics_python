@@ -51,10 +51,6 @@
 	<style type="text/css">{{ page.style }}</style>
 	{% endunless %}
 
-	{% if page.mathjax or page.ipython_notebook %}
-		{% include _mathjax_javascript_tag.html %}
-	{% endif %}
+	{% include _mathjax_javascript_tag.html %}
 
-	{% if page.ipython_notebook %}
-		{% include _ipython_notebook_syntax_highlighting_style_tag.html %}
-	{% endif %}
+	{% include _ipython_notebook_syntax_highlighting_style_tag.html %}
