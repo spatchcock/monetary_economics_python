@@ -2,7 +2,7 @@
 layout: page-fullwidth
 title: "The Circular Flow of Money"
 subheadline: "The simplest model of monetary flows"
-date: 2016-04-13
+date: 2016-04-10
 ---
 
 
@@ -18,6 +18,7 @@ date: 2016-04-13
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Whole economies are (obviously, very) complex. They involve the aggregate economic decisions and actions of individuals, businesses, banks and governments. They include concepts such as money, prices (or inflation), government spending and taxation, public and/or private debt together with interest rates, as well as trade with other economies. Each of these may be of interest in their own right but their effect on overall income levels (and therefore living standards) might also be of primary interest. Ultimately, a sufficiently detailed model might seek to represent each of these concepts (and more). But understanding such complexity is easiest when it is broken down into simpler units. Therefore, we'd better pick a simple starting point and try to build up the complexity incrementally.</p>
 </div>
+<!--more-->
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="A-very-simple-economy">A very simple economy<a class="anchor-link" href="#A-very-simple-economy">&#182;</a></h2>
 </div>
