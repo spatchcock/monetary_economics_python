@@ -10,7 +10,8 @@ permalink: "/"
 	<div class="small-12 columns t30">
 		<h1>{{ page.title }}</h1>
 		{% if page.teaser %}<p class="teaser">{{ page.teaser }}</p>{% endif %}
-
+		Some test stuff
+		{{site.posts}}
 		<dl class="accordion" data-accordion>
 			{% assign counter = 1 %}
 			{% for post in site.posts limit:1000 %}
