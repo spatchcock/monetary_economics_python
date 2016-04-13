@@ -12,8 +12,8 @@ permalink: "/"
 		<dl class="accordion" data-accordion>
 			{% assign counter = 1 %}
 			{% for post in site.posts reversed limit:1000 %}
-			<dd class="accordion-navigation">
-            <a href="{{ site.url }}{{ post.url }}"><span class="iconfont"></span> <strong>{{ post.title }}</strong>{% if post.subheadline %} </br>{{ post.subheadline }}{% endif %}</a>
+			<dd class="navigation">
+            <a href="{{ site.url }}{{ post.url }}"><strong>{{ post.title }}</strong>{% if post.subheadline %} </br>{{ post.subheadline }}{% endif %}</a>
 
               
             </dd>
