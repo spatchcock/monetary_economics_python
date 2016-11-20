@@ -1,0 +1,553 @@
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">last post</a> we looked at they way in which government spending and taxation interacts with the circular flow of money. In particular, we found that, in an economy with no saving, money introduced by the government is repeatedly spent creating additional income beyond that created by the initial government spending. Since the government collects an income tax on each transaction, the money introduced by the government spending is gradually withdrawn as it is re-spent. This &quot;leakage&quot; of money out of circulation places a limit on the total amount of spending and income that can ultimately arise. The eventual total level of aggregate income was shown to be a multiple, <span class="math">\(\frac {1}{\theta}\)</span>, of the initial government spend (where <span class="math">\(\theta\)</span> is the tax rate). Here we'll consider what changes in this story when the population decide to save some of their income.</p>
+<p>In order to incorporate the effects of saving we just need to make one change to our setup from before. Instead of assuming that folk spend all of their disposable (i.e. after-tax) income we will assume that they spend only some fraction of it, saving the rest. The fraction that they spend is commonly described as <em>the propensity to consume</em> and we can denote it with the symbol <span class="math">\(\alpha\)</span>. The fraction saved is therefore <span class="math">\(1-\alpha\)</span>.</p>
+<p>Let's put a figure of <span class="math">\(0.9\)</span> on <span class="math">\(\alpha\)</span> for illustrative purposes - i.e. 90% of income is spent onwards, the remaining 10% being saved. When we consider the previous scenario of 100 pounds of government spending we find that, of the 80 pounds of initial government spending that remains as disposable income after 20% tax is paid, 72 pounds is spent (90% of 80 pounds) and 8 pounds is saved. As this 72 pounds of consumption spending creates 72 pounds of income, a further 14.40 pounds is paid in tax to the government and therefore 57.6 pounds is retained as disposable income from this second round of spending. Of this 57.6 pounds, 51.84 pounds is spent with 5.76 saved. And so on.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">round</th>
+<th align="left">spending</th>
+<th align="left">income</th>
+<th align="left">tax</th>
+<th align="left">disposable income</th>
+<th align="left">income saved</th>
+<th align="left">income spent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">20</td>
+<td align="left">80</td>
+<td align="left">8</td>
+<td align="left">72</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">72</td>
+<td align="left">72</td>
+<td align="left">14</td>
+<td align="left">58</td>
+<td align="left">6</td>
+<td align="left">52</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">52</td>
+<td align="left">52</td>
+<td align="left">10</td>
+<td align="left">42</td>
+<td align="left">4</td>
+<td align="left">38</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">38</td>
+<td align="left">38</td>
+<td align="left">8</td>
+<td align="left">30</td>
+<td align="left">3</td>
+<td align="left">27</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">27</td>
+<td align="left">27</td>
+<td align="left">5</td>
+<td align="left">22</td>
+<td align="left">2</td>
+<td align="left">20</td>
+</tr>
+</tbody>
+</table>
+<p>Notice, in the table above, that we are retaining the term <em>disposable income</em> to denote what is left after tax but before any spending and saving choices have been made. Two extra columns are introduced into this table to show what is done with the disposable income: how much is saved and how much is spent. The final column of each row describes the income after taxation <em>and</em> saving and which becomes the spending in the next round, shown at the start of the next row.</p>
+<p>Now, let's give this a similar mathematical treatment to <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">before</a> to see where it ultimately heads. The initial income, <span class="math">\(Y_0\)</span> is simply equal to <span class="math">\(G\)</span>, the initial government spend. On this income, <span class="math">\(\theta G\)</span> tax is paid and <span class="math">\((1-\theta)G\)</span> remains as disposable income. In this case, however, the amount spent in consumption is a further fraction, <span class="math">\(\alpha\)</span>, of this disposable income. Therefore we can state the income from the second round of spending as:</p>
+<p><span class="math">\[Y_1 = \alpha(1-\theta)G\]</span></p>
+<p>But if this income, <span class="math">\(Y_1\)</span>, is used to pay taxes, save and spend according to the rules we've specfied, then the next round of income can be described as:</p>
+<p><span class="math">\[Y_2 = \alpha(1-\theta)\alpha(1-\theta)G \]</span></p>
+<p>or, more succinctly:</p>
+<p><span class="math">\[Y_2 = (\alpha(1-\theta))^2G\]</span></p>
+<p>As before, we can generalise this to the <em>n</em>th spending round:</p>
+<p><span class="math">\[Y_n = (\alpha(1-\theta))^nG \hspace{1cm} (1)\]</span></p>
+<p>And if we add all of the spend rounds together we get another <a href="https://en.wikipedia.org/wiki/Geometric_series">geometric series</a> describing the total income which arises through the repeated cycle of spending, taxing and saving of the money injected by the government:</p>
+<p><span class="math">\[\sum_{n=0}^{\infty} Y_{n} = G + (\alpha(1-\theta))G + (\alpha(1-\theta))^2 G + ... + (\alpha(1-\theta))^2G \]</span></p>
+<p>This time the common ratio of the geometric series is <span class="math">\(\alpha(1-\theta)\)</span>. As before we can plug our common ratio into the general solution for the sum of a geometric series:</p>
+<p><span class="math">\[\sum_{n=0}^{m-1} Y_{n} = \frac {1-a^m}{1 - a}G\]</span></p>
+<p>where <span class="math">\(a\)</span> is the generic common ratio, giving:</p>
+<p><span class="math">\[\sum_{n=0}^{m-1} Y_{n} = \frac {1-(\alpha(1-\theta))^m}{1-\alpha(1-\theta)}G \hspace{1cm} (2)\]</span></p>
+<p>Not quite as neat and tidy as before but we do have a more complicated scenario so fair enough. Let's plot out equations 1 and 2, the individual spending round income and the cumulative income through successive spending rounds:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[2]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span> 
+
+<span class="n">G</span>     <span class="o">=</span> <span class="mi">100</span> <span class="c"># government spending</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c"># tax rate</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c"># propensity to consume</span>
+
+<span class="n">n_rounds</span> <span class="o">=</span> <span class="mi">30</span> <span class="c"># number of rounds we&#39;ll consider</span>
+
+<span class="c"># create an array of numbers from 0-30, one for each spending round</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_rounds</span><span class="p">)</span> 
+
+<span class="c"># solve equation 1 for each individual round</span>
+<span class="n">y_n</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span><span class="o">**</span><span class="n">r</span>
+
+<span class="c"># solve equation 2 for each individual round</span>
+<span class="n">sum_y</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+
+<span class="c"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sum_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#39;cumulative income&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">y_n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;spending round income&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;center right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Spending round, n&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Income&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_display_data">
+
+
+<img src="data:image/png;base64,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
+CEmSRG5urhw/YsQIsW3bNiGEEKGhoeLzzz+X3ysvLxfu7u5tbj9bQjufvc58lxs9JjV58mRER0dj
++PDhcHFxgRCCDyUkclClpaW44YYb4OLSuUso/fz85J+7desGX1/fFtNnz57t1HKXLVuGd955B+Xl
+5ZAkCWfOnJGH64yJiYlBXV0dcnNz4evri/3792Pq1KkAgGPHjuH999/HqlWr5PiLFy+2eJJ4R5qv
+b/fu3eX1Ky0txcCBA9tsU15ejhtuuEGe7t+/P8rLy+XpXr16yd+x3bt377CfY8eOYerUqS22l5ub
+G6qqqhzm3AGjRaq+vh5vvvmmLXIhIjvr168fjh8/jqamJri6urZ4r2fPnqirq5OnKysrO1xWR3/M
+XnfddQAunT3cs2fPDpeXk5OD119/HV988YV8vaaPjw8u/WFufBjS1dUV8fHx2LBhA3x9fXHHHXfI
+/ffv3x8vvPACFixY0OEyzNW/f39kZGS0+V7fvn1RUlKCIUOGAACOHz+Ovn37drqfd999F9HR0Z3O
+VemM/rk0c+ZMvP3226ioqEB1dbX8IiLHExkZiYCAAMyfPx91dXW4cOECvv76awCAVqvFnj17UFpa
+it9++00+EaA5Q+Fo/XNrffr0QWBgINatW4empia88847OHr0aJuxtbW1cHNzQ+/evdHQ0IDFixfj
+TLPT6f39/VFSUnJFf82nZ86ciY0bN+LDDz/EzJkz5flz587Fv/71L+Tm5kIIgXPnzuE///mPSXt8
+Ha3fbbfdhoqKCqxYsQL19fWora1Fbm4uACAhIQF//etfcerUKZw6dQqLFy9ucUKKOR5++GEsWLAA
+x48fB3DppJDt27d3allKZbRIdevWDX/+858RFRWFESNGYMSIERg5cqQtciNyGt4eHpAAq728PTxM
+ysPFxQWffPIJjhw5gv79+6Nfv37YtGkTAGD8+PG45557MHz4cNx000244447rtiLafHYhzZOhGg+
+vWbNGrz++uvo3bs3CgsLMWrUqDbbTpo0CZMmTUJISAjUajW6d++O/v37y7F33303gEvDZM2/m5r3
+FRERgZ49e6KiogK33nqrPH/EiBFYs2YN5s2bBx8fHwQHB+P9999v9//H1PXz8PDAp59+ik8++QQB
+AQEICQlBdnY2AODFF1/EyJEjMXz4cAwfPhwjR47Eiy++2GYfbU0398QTTyAuLg4TJkyAp6cnoqOj
+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
+WCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxS
+RESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESkWCxSRESk
+WCxSRESkWBYvUg888AD8/PwQFhYmz6uurkZsbCxCQkIwYcIEnD59Wn4vNTUVwcHBCA0NRVZWlqXT
+ISKiLsziRWr27NnIzMxsMS8tLQ2xsbEoKirCuHHjkJaWBgAoLCxERkYGCgsLkZmZiUcffRR6vd7S
+KRERURdl8SI1evRoeHt7t5i3fft2JCYmAgASExOxdetWAMC2bduQkJAAd3d3qNVqBAUFITc319Ip
+ERFRF+Vmi06qqqrg5+cHAPDz80NVVRUAoLy8HFFRUXKcSqVCWVlZm8uQJMmEntwhRAMAIBtAzOW5
+2Zf/bT1tkJ3dck578fK0wuJbtzE1PiYmxirxv2diWj6t4w3zlBKvtO1tq8+HufG2+nyYG2+YZ614
+U7eHufHytMLiW7fpKN7wc1JSEtRqNTpFWEFxcbEYNmyYPO3l5dXifW9vbyGEEPPmzRPr16+X5ycn
+J4vNmzdfsTwAAhAmvCDHm9Kg+eqb28ZafTAn6/fBnJiTPfpgTqLFz6ayydl9fn5+qKysBABUVFTA
+19cXABAYGIjS0lI57sSJEwgMDLRFSkRE1AXYpEjFxcUhPT0dAJCeno4pU6bI8zdu3IiGhgYUFxfj
+8OHDiIiIsEVKRETUBVj8mFRCQgK+/PJLnDp1Cv369cPixYsxf/58xMfHY+3atVCr1di0aRMAQKPR
+ID4+HhqNBm5ubli9erWJx56IiMgZSJfHCRXtUuEyJU0JQghIkmRiNGBYfXPbWKsP5mT9PpgTc7JH
+H8zpch9mlhzecYKIiBSLRYqIiBSLRYqIiBSLRYqIiBSLRYqIiBSLRYqIiBSLRYqIiBSLRYqIiBSL
+RYqIiBSLRYqIiBSLRYqIiBTLJg89tD03SGg0KY6IiJTLQb+lG2HqDWmJiEi5ONxHRESKxSJFRESK
+xSJFRESKxSJFRESKxSJFRESKxSJFRESKxSJFRESKxSJFRESKZdOLedVqNTw9PeHq6gp3d3fk5uai
+uroa99xzD44dOwa1Wo1NmzbBy8vLlmkREZFC2XRPSpIkZGdnIz8/H7m5uQCAtLQ0xMbGoqioCOPG
+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
+AAAASUVORK5CYII=
+">
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A similar type of pattern as before, except this time, instead of aggregate income converging to 500 pounds it converges to 357 pounds. This is because there are now two &quot;leakages&quot; of money out of circulation - taxation and saving - and so less money remains in the cycle of spending and re-spending which supports incomes.</p>
+<p>If we consider a sufficiently large number of spending rounds then the numerator in equation 2 converges to 1 (because <span class="math">\(\theta\)</span> and <span class="math">\(\alpha\)</span> are both between <span class="math">\(0-1\)</span>) and we can write the total income more simply as function of the fiscal policy settings (<span class="math">\(G, \theta\)</span>) and the private sector spending propensity (<span class="math">\(\alpha\)</span>):</p>
+<p><span class="math">\[Y = \frac {G}{1-\alpha(1-\theta)} \hspace{1cm} (3)\]</span></p>
+<p>And sure enough, if we evaluate that expression using the variables we defined earlier:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[3]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">Y</span> <span class="o">=</span> <span class="n">G</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+357.142857143
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>we get the value shown in the plot. And as before, we can shift <span class="math">\(G\)</span> over to identify the <em>fiscal multiplier</em> - the size of aggregate income <em>relative to the government spend</em>:</p>
+<p><span class="math">\[\frac {Y}{G} = \frac {1}{1-\alpha(1-\theta)}\]</span></p>
+<p>In this case, the fiscal multiplier evaluates to:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[4]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+3.57142857143
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The fiscal multiplier is smaller in this case (<span class="math">\(3.57 \lt 5\)</span>) because of the desire of the private sector to save. As shown in an <a href="http://misunderheard.org/monetary_economics/2016/06/05/the-paradox-of-thrift/">earlier post</a>, saving always brings about a reduction in income, all other things being equal.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Simple, so far. But the really interesting insight comes when we look at where those leakages have gone. On the one hand we have the tax collected by the government and on the other the money saved by the public. Let's look at the tax revenue (<span class="math">\(T\)</span>) first. As we know:</p>
+<p><span class="math">\[T = \theta Y\]</span></p>
+<p>The tax paid is simply the total income multiplied by the tax rate. Equation 3 gives us the total income, so all we need to do is multiply this value by the tax rate, as in the equation above, to arrive at the final tax revenue of the government.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[6]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">T</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">Y</span>
+<span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+71.4285714286
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So the government has collected ~71 pounds in tax. If the drop in aggregate income was the first significant difference from the non-saving scenario described in the last post, then this is the second one. The government has collected less tax than before and has therefore <em>not</em> balanced it's budget. If we subtract the original government spend from the tax revenue we can establish what the shortfall is:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[7]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">G</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+-28.5714285714
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So the government now has a ~29 pound <em>budget deficit</em>. To understand why we need to look at the savings. We know that savings were made as a fraction, <span class="math">\(1 - \alpha\)</span>, of <em>disposable income</em>, which itself is a fraction, <span class="math">\(1 - \theta\)</span>, of gross income (<span class="math">\(Y\)</span>). Therefore we can write the total accumulated savings, <span class="math">\(S\)</span>, as a function of gross income:</p>
+<p><span class="math">\[S = (1-\alpha)(1-\theta)Y\]</span></p>
+<p>This basically describes the fraction of income that is <em>not</em> taxed (<span class="math">\(1-\theta\)</span>) and then <em>not</em> spent (<span class="math">\(1-\alpha\)</span>). Now we can solve this equation using our calculated final income (equation 3) to determine the value of <span class="math">\(S\)</span>:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[9]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">Y</span>
+<span class="k">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+28.5714285714
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The public have managed 29 pounds in saving. Notice anything? It is exactly the amount of the government's budget deficit. Is that a coincidence? Definitely not.</p>
+<p>What is happening here is a fairly simple extension of the previous scenario when no saving occured. Previously the rate of spending gradually decreased as money was withrawn from circulation by taxation, and ultimately stopped when all the money had been withdrawn. Since taxation was the only leakage of money from circulation it was a logical inevitability that the government would recoup all of its spending and balance its budget: taxation was the only game in town and spending simply delayed the inevitable. In this case, though, there are two leakages - taxation and savings. Both of these leakages work in tandem to draw down the circulating stock of money, and once it has been entirely withdrawn it is therefore split between the government's tax haul and the private sector's pot of savings. It is straighforward to the see that the amount which was <em>saved</em> out of circulation is the amount which was <em>not</em> able to be taxed. Hence, the government's budget shortfall is identically equal to the private sectors savings. This is a rather profound discovery which tells us something about why government budget deficits arise in general.</p>
+<p>So, in summary: the interaction of government spending, taxation, private consumption and private saving results in a cycle of spending which ultimately stops when all of the money has either been taxed or saved. This results in an overall aggregate income which is smaller than the case where no saving occurs. It also results in a government budget deficit which matches, to the penny, the savings of the private sector.</p>
+</div>
