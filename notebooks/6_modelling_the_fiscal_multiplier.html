@@ -1,0 +1,284 @@
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is the third post in a series of posts looking at the fiscal multiplier. Previously, we have examined how the circular flow of money interacts with <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">government spending and taxation</a> (as well as <a href="http://misunderheard.org/monetary_economics/2016/11/20/government-money-and-saving/">private saving</a>) by considering a mathematical structure called a <em>geometric series</em>. This interpretation of the fiscal multiplier is based around the concept of &quot;spending rounds&quot; which represent successive events in which income received previously is spent onwards, creating new income which is spent in the next round, and so on. Each spending round involves a successively smaller amount of circulating money because a fraction of all income is collected in tax (or saved). Eventually, all of the money has been withdrawn from circulation via taxation (and saving) and the spending stops. In the interim period, the circulation of the ever-reducing money stock produces a total, cumulative amount of income.</p>
+<p>This approach is an intuitive way of thinking about sequences of spending. It enables us to conceive of how the money initially introduced by government spending is passed around the economy and what the implications of taxation and saving are. But whilst it arguably does a good job of describing how individual acts of spending follow the receipt of income, it should be recognised that in real economies <em>collective spending</em> does not precede <em>collective income</em> in discrete, ordered stages. Spending and the receipt of incomes arise via an incredibly complex network of millions of overlapping transactions occuring continuously.</p>
+<p>The concept of the spending round also leads to questions such as how long it takes for a single spending round to occur, or the number of rounds that should be considered. It seems reasonable, for example, that the number of spending rounds included in any analysis would depend on the time period under consideration. But it is not really clear how spending rounds relate to absolute time. However, it turns out that these concerns can be adequately side-stepped by using a coherent accounting framework. This post attempts to tighten up our understanding of the fiscal multiplier and presents an alternative mathematical derivation which is more conducive to inclusion in more complex models.</p>
+<h2 id="accounting-for-time">Accounting for time</h2>
+<p>In the previous posts we looked at two ways of using geometric series to look at the fiscal multiplier. We either examine: (1) the income arising from a specific, finite number of spending rounds; or (2) the income as the number of spending rounds converges towards infinity. In practise, an infinite number of spending rounds can not actually occur because of the indivisibility of the smallest unit of the currency (a penny). The implication, therefore, of over-generously compounding our spending all the way through to the theoretical limit at infinity, is that we conceivably overstate the multiplier effect of the last penny in circulation. With government spending at a scale of, say, thousands or millions of pounds at a time, even the most pedantic among us would be hard pushed to be overly distressed by this. So, for all practical purposes, the infinite geometric sum is a perfectly reasonable way of encapsulating the &quot;complete&quot; consequences of money circulating under a certain set of taxation and saving conditions.</p>
+<p>The question then arises as to whether there are any reasons to examine a truncated number of rounds versus the fully compounded set of spending rounds. If we're only concerned with a short time period, for example, is it appropriate to truncate the geometric series to some smaller number of spending rounds? The answer is &quot;no&quot;, because we can describe any scenario we want, completely, without stipulating anything about the number or frequency of spending events.</p>
+<p>The key is to understand that, since spending and income are flows, when we track them we are implicitly considering a particular time period. Up until now, we've discussed the fiscal multipler equations without considering what time period they may represent. But there is always some time reference implicit in them since they deal with flow variables (i.e. values <em>per time</em>). When we calculate income, <span class="math">\(Y\)</span>, it <em>has</em> to represent income <em>over some time period</em>, e.g a week, or a month or a year, because <em>that is what income is</em>. And all we need to do is get the accounting correct over this time period. We don't need to resolve individual transactions or spending rounds.</p>
+<p>To illustrate this, suppose we're interested in resolving our economy over a time period of 1 week. We can use our equations to simulate the flows of income during that week. One thing we now have clarification on - that we didn't necessarily have before - is that the value for <span class="math">\(G\)</span> now implicitly represents <em>weekly</em> government spending. Suppose now, for arguments sake, that we believe that only 5 spending rounds could possibly occur in a week (for whatever reason). And further, we'll assume no saving desire on the part of the private sector, to keep it simple. Then we can solve our equations for 5 rounds of spending only and obtain an estimate for the total amount of income generated over those 5 rounds.</p>
+<p>The equation for calculating the cumulative income over a finite sequence of spending rounds without saving (originally derived <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">here</a>) is:</p>
+<p><span class="math">\[\sum_{n=0}^{m-1} Y_{n} = \frac {1-(1-\theta)^m}{\theta}G \hspace{2cm} (1)\]</span></p>
+<p>Let's calculate the income over 5 spending rounds using the same values for <span class="math">\(G\)</span> and <span class="math">\(\theta\)</span> as previously.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[62]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span> 
+
+<span class="n">G</span>     <span class="o">=</span> <span class="mi">100</span> <span class="c"># government spending</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c"># tax rate</span>
+
+<span class="n">rounds</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c"># solve equation 1 for the 5th spending round</span>
+<span class="n">sum_y</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">rounds</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sum_y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+368.928
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we find that, after 5 rounds of spending, with no saving, 369 pounds of total income has been generated by the initial 100 pound government spend. We can calculate the tax paid on this amount very simply by multiplying it by the tax rate:</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[63]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># calculate the total tax paid after the 5th spending round</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">theta</span><span class="o">*</span><span class="n">sum_y</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+73.7856
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So the government has recouped ~74 pounds of its original 100 pounds spending outlay by the 5th spending round. But this means that the economy is still holding on to some money. This money is the disposable income left over on the 5th and final round of spending, which would have been spent in the 6th round had we not truncated the series. We can easily calculate this amount of <em>disposable</em> income by determining the <em>gross</em> income received on the 5th spending round and then subtracting the tax paid. The equation for the gross income generated by an individual spending round without saving (originally derived <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">here</a>) is:</p>
+<p><span class="math">\[Y_n = (1-\theta)^nG \hspace{2cm} (2)\]</span></p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[58]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># solve equation 2 for the 6th spending round</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">rounds</span><span class="p">)</span> <span class="c"># gross income</span>
+
+<span class="c"># subtract the tax paid</span>
+<span class="n">y_d</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>           <span class="c"># disposable income</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">y_d</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+26.2144
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So after 5 spending rounds, the private sector is still holding on to 26 pounds, which exactly matches the amount of the initial government spend which has not yet been collected in taxes (<span class="math">\(100 - 74 = 26\)</span>). From the perspective of our accounting period (1 week), this looks indistinguishable from a scenario in which saving <em>has</em> occurred, despite the fact that we specified no saving. Well, we could achieve the same result by simply specifying the appropriate propensity to spend (<span class="math">\(\alpha\)</span>) at the outset and allowing the full compounding of these behaviours through the cycle of spending.</p>
+<p>The equation for calculating the fully compounded, cumulative income <em>with</em> saving (originally derived <a href="http://misunderheard.org/monetary_economics/2016/11/20/government-money-and-saving/">here</a>) is:</p>
+<p><span class="math">\[Y = \frac {G}{1-\alpha(1-\theta)} \hspace{2cm} (3)\]</span></p>
+<p>Rearranging this to solve for <span class="math">\(\alpha\)</span>, we get:</p>
+<p><span class="math">\[\alpha = \frac {1- \frac {G}{Y}}{1-\theta}\]</span></p>
+<p>And if we plug in the income (<span class="math">\(Y\)</span>) we arrived at after 5 spending rounds of the no saving scenario we can calculate the implied value for <span class="math">\(\alpha\)</span>.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[59]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">G</span><span class="o">/</span><span class="n">sum_y</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+0.911180501344
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We get a propensity to consume of ~91%, which implies a propensity to save of ~9%. Let's test this out by using this calculated value for <span class="math">\(\alpha\)</span> in equation 3.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[60]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">sum_y</span> <span class="o">=</span> <span class="n">G</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sum_y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+368.928
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sure enough, we get the same total income calculated using a fully compounding spending sequence with a savings rate of ~9% as we did when we looked at only 5 spending rounds with no saving. And if we check the savings and tax, we find the same (cumulative savings equation described here).</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[61]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">sum_y</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">theta</span><span class="o">*</span><span class="n">sum_y</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+26.2144
+73.7856
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we've shown that we can describe the exact same scenario by either examining: (1) a truncated number of spending rounds; or (2) the fully compounded, complete (mathematically infinite) series of spending rounds. The difference is simply accommodated by the <span class="math">\(\alpha\)</span> parameter.</p>
+<p>The fully compounding approach is preferable for at least two reasons. Firstly, as illustrated in the example above, the fully compounding approach explicitly includes a propensity to consume parameter (<span class="math">\(\alpha\)</span>) which is less than <span class="math">\(1\)</span> and therefore very clearly describes a scenario with private saving. This approach therefore captures the spirit of the scenario in a much more obvious way than the truncated spending round approach. In the truncated approach, there <em>was</em> saving occuring (in the accounting period under consideration) but this was obscured by the choice of a mathematical structure which implied no saving (an implicit spending propensity of <span class="math">\(1\)</span>; saving propensity of <span class="math">\(0\)</span>). Even if we were comparing two scenarios with saving explicitly defined, one truncated and one fully compounded, the fully compounded approach would contain the more pertinent propensity to consume parameter. In general, it is good practice to use models which are as clear, tidy and intuitive as possible, and the use of a model which produces behaviour which is seemingly at odds with the model design and parameter choices is asking for trouble. The fully compounding approach is therefore a more reliable means of achieving a desired model scenario.</p>
+<p>Secondly, the fully compounding approach allows us to make one less assumption about the model: namely, the number of spending rounds to consider. What's the point in setting two parameters when one will do to completely specify whatever it is we are trying to do? Importantly, this means we now also don't even have to entertain questions pertaining to how long a single spending round takes or how many spending rounds occur within a particular time period, which seemed like a bit of an awkward problem at the start. Instead, we simply satisfy ourselves with always compounding the spending through to the logical conclusion determined by our clear and deterministic tax and spending (or saving) parameters.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="a-more-elegant-approach">A more elegant approach</h2>
+<p>Now that we have convinced ourselves that we don't need to worry about individual spending rounds too much, we can lose the geometric series and look at an alternative mathematical derivation which is arguably more succinct and elegant. This approach is also more conducive to inclusion in more complex models that require additional equations.</p>
+<p>Recall that aggregate income represents the cumulative income of successive spending events via the circular flow of spending and incomes. <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">Previously</a>, we wrote this as:</p>
+<p><span class="math">\[\sum_{n=0}^{\infty} Y_{n} = Y_0 + Y_1 + Y_2 + Y_3 + ... \]</span></p>
+<p>Now, we know that the initial income, <span class="math">\(Y_0\)</span> is due to government spending, <span class="math">\(G\)</span>, and so we can rewrite this as:</p>
+<p><span class="math">\[\sum_{n=0}^{\infty} Y_{n} = G + Y_1 + Y_2 + Y_3 + ... \]</span></p>
+<p>Now, all of the remaining <span class="math">\(Y_n\)</span> terms represent the income arising from private sector - i.e. non-government - spending. So total income is made up of two quite distinct forms of spending: government spending and private spending, the private spending being a more complicated phenomena in that it involves the circular flow of repeatedly spent incomes.</p>
+<p>We can call this private sector spending <em>consumption</em> and denote it as <span class="math">\(C_n\)</span>, i.e. we have repeated rounds of <em>consumption</em> - as distinct from government spending <span class="math">\(G\)</span>:</p>
+<p><span class="math">\[\sum_{n=0}^{\infty} Y_{n} = G + C_1 + C_2 + C_3 + ... \]</span></p>
+<p>and writing this more succinctly, we can combine the consumption terms:</p>
+<p><span class="math">\[\sum_{n=0}^{\infty} Y_{n} = G + \sum_{n=1}^{\infty} C_n \]</span></p>
+<p>This equation simply states that total income is equal to government spending plus the cumulative total of subsequent private consumption spending. The term <span class="math">\(\sum C_n\)</span> is called <em>final consumption</em> which attests to the fact that it represents the compounding of spending and incomes through a repeated, circular process, as opposed to the flow of a single spending event (the process we've thus far modelled using geometric series).</p>
+<p>Being even more neat and tidy we can drop the <span class="math">\(\sum\)</span> notation and simply write:</p>
+<p><span class="math">\[Y = G + C \hspace{1cm} (4)\]</span></p>
+<p>where <span class="math">\(Y\)</span> is understood to represent total aggregate income and <span class="math">\(C\)</span> is understood to represent <em>final consumption</em>, i.e.:</p>
+<p><span class="math">\[C = \sum_{n=1}^{\infty} C_n \]</span></p>
+<p>Equation 4 is now closer to the income equation that is more commonly used in models of the economy. But it looks too simple doesn't it? How can it possibly include the compounding effects of consumption spending cycle that we understood via geometric series? The answer is that we need to combine equation 4 with one other equation - one that describes the spending behaviour of the private sector. For now, let's assume non-saving behaviour for simplicity:</p>
+<p><span class="math">\[C = (1-\theta)Y \hspace{1cm} (5a)\]</span></p>
+<p>This equation - termed a <em>consumption function</em> - defines the level of final consumption as being equal to aggregate income after tax, and simply implies that all disposable (i.e. after-tax) income is used for consumption spending, with nothing saved. We now have two equations that describe our economy, equations 4 and 5a. Notice that there are <em>no</em> subscripts in these equations. They do not describe individual spending rounds. Rather these are a pair of <em>coupled equations</em>, both referring to <em>aggregate</em> <span class="math">\(C\)</span> and <span class="math">\(Y\)</span> and therefore implying an exact solution for each.</p>
+<p>We can solve them simultaneously if we substitute equation 5a in to equation 4:</p>
+<p><span class="math">\[Y = G + (1-\theta)Y\]</span></p>
+<p>And solving for <span class="math">\(Y\)</span> gives:</p>
+<p><span class="math">\[Y = \frac {G}{(1 - (1-\theta))}\]</span></p>
+<p>which simplifies to:</p>
+<p><span class="math">\[Y = \frac {G}{\theta}\]</span></p>
+<p>This is same result we obtained using the <a href="http://misunderheard.org/monetary_economics/2016/11/20/circular-flow-of-government-money/">geometric series approach to <em>non-saving</em> behaviour</a>. In other words, the values of <span class="math">\(C\)</span> and <span class="math">\(Y\)</span> which simultaneously satisfy equations 4 and 5a are the same as those that we rather mechanistically derived previously when considering the sequence of repeated spending and taxation cycles that occurs following government spending via geometric series.</p>
+<p>If we want to include saving then we simply define the consumption function (equation 5a) with an additional propensity to consume term (<span class="math">\(\alpha\)</span>):</p>
+<p><span class="math">\[C = \alpha(1-\theta)Y \hspace{1cm} (5b)\]</span></p>
+<p>Again, we have coupled equations describing our economy, which now involves saving. To solve these equations we can substitute our new expression for <span class="math">\(C\)</span> (equation 5b) into equation 4:</p>
+<p><span class="math">\[Y = G + \alpha(1-\theta)Y\]</span></p>
+<p>and solving for <span class="math">\(Y\)</span>:</p>
+<p><span class="math">\[Y = \frac {G}{1 - \alpha(1-\theta)}\]</span></p>
+<p>Again, the same result as the one derived using the <a href="http://misunderheard.org/monetary_economics/2016/11/20/government-money-and-saving/">geometric series approach for the <em>saving</em> scenario</a>.</p>
+<p>When viewed separately, equations 4 and 5a/5b seem to state some rather trivial things about how spending relates to income. But taken together as a <em>system</em> of coupled equations they describe the full effects of the fiscal multiplier: the compounding of incomes and tax revenue through repeated but diminishing cycles of consumption spending. This is much more succinct and elegant than dealing with the geometric series equations, although geometric series approach perhaps does describe what's going on more intuitively.</p>
+<p>An advantage to this formulation is that we have separated our model in to equations which describe distinct things. Equation 4 is an identity describing the relationship of spending to income; equations 5a and 5b characterise the <em>behaviour</em> of folk in the private sector; we could characterise it as a &quot;behavioural&quot; equation. With more complicated scenarios this &quot;separation of concerns&quot; into a number of individual, focussed equations can provide a cleaner and more flexible system for building a mathematical model than trying to shoehorn all of the complexity into a single geometric series (although a reasonably complicated model may still be less trival to solve than the example described here).</p>
+<h2 id="summing-up">Summing up</h2>
+<p>We started with a model of the fiscal multiplier which was rather intuitive but proceeded quite mechanically through a series of discrete spending rounds which had an ambiguous relationship with time. What we've arrived at now is a more succinct model which encapsulates the compounding effects of the cycle of spending and the implications of taxation and saving, but all within clearly defined accounting periods which represent an absolute interval of time. We can use this as a basis for building more complicated models that describe the evolution of an economy through a succession of such clearly defined time periods, with each itself incorporating the full fiscal multiplier effect. This is preferable to trying to resolve every individual spending round because: (1) we (or I!) don't know how to relate spending rounds to time; and (2) spending, on aggregate, doesn't really occur in discrete, successive rounds anyway.</p>
+<p>The idea of modelling a succession of such &quot;fully-compounded&quot; accounting periods which describe an economy evolving through time leads to another type of question: what if some of the money saved in one time period is spent in a subsequent time period? This requires a more complicated consumption function that describes both spending out of income <em>and</em> spending out of savings during any given time period. Such an approach would effectively describe a smoothing of spending across time periods whilst still keeping the accounting within any individual time period completely watertight. This highlights the need to properly account for <em>stocks</em> (e.g. the total amount saved at any given point in time) as well as flows, and will hopefully be described in more detail in subsequent posts.</p>
+</div>
