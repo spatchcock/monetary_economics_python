@@ -3,7 +3,7 @@
 # This script describes a simple the iteration of a simple economic model based
 # on government money. It is described in the accompanying iPython Notebook and at 
 #
-# http://misunderheard.org/monetary_economics/2017/06/03/simple_economy_with_government_money/
+# http://misunderheard.org/monetary_economics/2017/06/03/simple-economy-with-government-money/
 #
 
 # %% Include requrie libraries
