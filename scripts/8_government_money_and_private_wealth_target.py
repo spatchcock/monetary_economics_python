@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 # This script describes the iteration of a simple economic model based
-# on government money. It is described in the accompanying iPython Notebook and at 
+# on government money and including spending out of savings. It is described 
+# in the accompanying iPython Notebook and at 
 #
-# http://misunderheard.org/monetary_economics/2017/06/03/simple-economy-with-government-money/
+# http://misunderheard.org/monetary_economics/2017/07/19/government-money-and-private-wealth-target/
 #
 
 # %% Include requrie libraries
@@ -19,9 +20,11 @@ N = 100
 G     = 20  # government spending
 theta = 0.2 # tax rate
 
-#%% Set the propensity to consume
+#%% Set the propensity to consume out of income and saved wealth
 
-alpha = 0.9
+alpha_Y = 0.9
+alpha_H = 0.2
+
 
 #%% Initialize containers to hold results
 
@@ -37,13 +40,13 @@ H_g = np.zeros(N) # government balance
 for t in range(0, N):
     
     # calculate total income for this time step (equation 1)
-    Y[t] = G/(1 - alpha*(1-theta))
+    Y[t] = (G + alpha_H*H_h[t-1])/(1 - alpha_Y*(1-theta))
     
     # calculate the tax paid on income for this time step (3)
     T[t] = theta * Y[t]
     
     # calculate the consumption spending for this time step (4)
-    C[t] = alpha*(1 - theta)*Y[t]
+    C[t] = alpha_Y*(1 - theta)*Y[t] + alpha_H*H_h[t-1]
     
     # calculate the new level of private savings for this time step (5)
     H_h[t] = H_h[t-1] + Y[t] - T[t] - C[t]
@@ -51,6 +54,7 @@ for t in range(0, N):
     # calculate the new level of government money balance (6)
     H_g[t] = H_g[t-1] + T[t]- G
    
+
 #%% Plot spending and income
 
 # initialise plot figure
@@ -85,35 +89,11 @@ print(G)    # this is a constant
 print(C[0]) # first time period - index 0
 print(Y[0]) # first time period - index 0
 
-#%% Plot government spending and tax revenue
+#%% Output some results from last time step
 
-# initialise plot figure
-fig = plt.figure(figsize=(8, 4))
-
-gov_plot = fig.add_subplot(121, xlim=(0, N), ylim=(0, np.max(G)*1.5))   # set axis limits
-gov_plot.plot(range(N), np.repeat(G,N), lw=3)                           # plot constant G versus time
-gov_plot.grid()                                                         # add gridlines
-plt.xlabel('time')                                                      # label x axis
-plt.ylabel('government spending')                                       # label y axis
-
-tax_plot = fig.add_subplot(122, xlim=(0, N), ylim=(0, np.max(G)*1.5))   # set axis limits
-tax_plot.plot(range(N), T, lw=3)                                        # plot tax revenue versus time
-tax_plot.grid()                                                         # add gridlines
-plt.xlabel('time')                                                      # label x axis
-plt.ylabel('tax revenue')                                               # label y axis
-
-plt.tight_layout() # space subplots neatly
-
-#%% Out put some results from first time step
-
-# Government spending (constant)
-print(G)
-# Tax revenue
-print(T[0])
-# Government budget position (deficit)
-print(T[0]-G)
-# Private saving rate
-Y[0] - T[0] - C[0] # alternative formulation: (1-alpha)*(1-theta)*Y[0]
+print(G)     # this is a constant
+print(C[-1]) # last time period - index -1
+print(Y[-1]) # last time period - index -1
 
 #%% Plot sector budget and balances
 
@@ -136,7 +116,49 @@ plt.ylabel('money balance')                                                     
 
 plt.tight_layout() # space subplots neatly
 
-#%% Output sector balances at last time step
+#%% Plot net saving dynamics
 
-print(H_h[-1]) # the -1 index represents the last value in the array
-print(H_g[-1])
+# calculate saving from income 
+S_Y = (1-theta)*(1-alpha_Y)*Y
+
+# calculate spending from saved wealth
+C_H = (np.append(0, H_h[0:-1]))*alpha_H
+
+# initialise plot figure
+fig = plt.figure(figsize=(8, 4))
+
+saving_plot = fig.add_subplot(111, xlim=(0, N), ylim=(0, 10))               # set axis limits
+
+saving_plot.plot(range(N), S_Y,       lw=3, label='saving out of income')   # plot saving from income
+saving_plot.plot(range(N), C_H,       lw=3, label='spending out of wealth') # plot spending from savings
+saving_plot.plot(range(N), S_Y - C_H, lw=3, label='net saving')             # plot net saving
+
+saving_plot.grid()                                                          # add gridlines
+
+plt.xlabel('time')                                                          # label x axis
+plt.ylabel('saving / dissaving per time period')                            # label y axis
+
+legend = saving_plot.legend(loc='lower right', shadow=True)
+
+plt.tight_layout() # space subplots neatly
+
+#%% calculate steady state wealth-income ratio
+(1 - alpha_Y)*(1 - theta)            # fractional saving out of income rate
+((1 - alpha_Y)*(1 - theta))/alpha_H  # ratio of fractional saving from income and spending from savings
+
+print(H_h[-1])        # final savings
+print(Y[-1])          # final income
+print(H_h[-1]/Y[-1])  # final wealth-income ratio
+
+
+
+
+
+
+
+
+
+
+
+
+
